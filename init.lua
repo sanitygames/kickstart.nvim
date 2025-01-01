@@ -84,6 +84,11 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- NOTE: settings for neovide
+if vim.g.neovide then
+  vim.print(vim.g.neovide_version)
+end
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -91,7 +96,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -227,6 +232,20 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+
+  -- NOTE: skkeletonの設定
+  {
+    'vim-skk/skkeleton',
+    dependencies = { 'vim-denops/denops.vim' },
+    config = function()
+      vim.fn['skkeleton#config'] {
+        globalDictionaries = { '~/.skk/SKK-JISYO.L' },
+        eggLikeNewline = true,
+      }
+
+      vim.keymap.set('i', '<C-j>', '<Plug>(skkeleton-enable)', { noremap = true })
+    end,
+  },
 
   -- NOTE: インデントを色つきで表示する。
   {
@@ -944,7 +963,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'gdscript' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
