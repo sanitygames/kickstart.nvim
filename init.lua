@@ -495,7 +495,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+      vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = '[S]earch Select [T]elescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
@@ -825,6 +825,7 @@ require('lazy').setup({
     config = function()
       local luasnip = require 'luasnip'
       local cmp = require 'cmp'
+      vim.keymap.set('n', '<leader>ss', require('luasnip.loaders').edit_snippet_files, { desc = 'Edit snippets' })
       require('luasnip.loaders.from_lua').load()
       cmp.setup {
 
@@ -1074,17 +1075,18 @@ require('lazy').setup({
     },
 
     -- NOTE: supercollider settings
-    config = function()
-      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-      parser_config.supercollider = {
-        install_info = {
-          url = 'https://github.com/madskjeldgaard/tree-sitter-supercollider',
-          files = { 'src/parser.c', 'src/scanner.c' },
-          maintainer = '@madskjeldgaard',
-        },
-        filetype = 'supercollider',
-      }
-    end,
+    -- config = function()
+    -- local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+    -- parser_config.supercollider = {
+    --   install_info = {
+    --     url = 'https://github.com/madskjeldgaard/tree-sitter-supercollider',
+    --     files = { 'src/parser.c', 'src/scanner.c' },
+    --     maintainer = '@madskjeldgaard',
+    --   },
+    --   filetype = 'supercollider',
+    -- }
+    -- end,
+    --
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
