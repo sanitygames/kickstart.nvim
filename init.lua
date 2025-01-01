@@ -21,66 +21,66 @@
 
 What is Kickstart?
 
-  Kickstart.nvim is *not* a distribution.
+    Kickstart.nvim is *not* a distribution.
 
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
+    Kickstart.nvim is a starting point for your own configuration.
+        The goal is that you can read every line of code, top-to-bottom, understand
+        what your configuration is doing, and modify it to suit your needs.
 
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
+        Once you've done that, you can start exploring, configuring and tinkering to
+        make Neovim your own! That might mean leaving Kickstart just the way it is for a while
+        or immediately breaking it into modular pieces. It's up to you!
 
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
+        If you don't know anything about Lua, I recommend taking some time to read through
+        a guide. One possible example which will only take 10-15 minutes:
+            - https://learnxinyminutes.com/docs/lua/
 
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
+        After understanding a bit more about Lua, you can use `:help lua-guide` as a
+        reference for how Neovim integrates Lua.
+        - :help lua-guide
+        - (or HTML version): https://neovim.io/doc/user/lua-guide.html
 
 Kickstart Guide:
 
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
+    TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
-    If you don't know what this means, type the following:
-      - <escape key>
-      - :
-      - Tutor
-      - <enter key>
+        If you don't know what this means, type the following:
+            - <escape key>
+            - :
+            - Tutor
+            - <enter key>
 
-    (If you already know the Neovim basics, you can skip this step.)
+        (If you already know the Neovim basics, you can skip this step.)
 
-  Once you've completed that, you can continue working through **AND READING** the rest
-  of the kickstart init.lua.
+    Once you've completed that, you can continue working through **AND READING** the rest
+    of the kickstart init.lua.
 
-  Next, run AND READ `:help`.
-    This will open up a help window with some basic information
-    about reading, navigating and searching the builtin help documentation.
+    Next, run AND READ `:help`.
+        This will open up a help window with some basic information
+        about reading, navigating and searching the builtin help documentation.
 
-    This should be the first place you go to look when you're stuck or confused
-    with something. It's one of my favorite Neovim features.
+        This should be the first place you go to look when you're stuck or confused
+        with something. It's one of my favorite Neovim features.
 
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
-    which is very useful when you're not exactly sure of what you're looking for.
+        MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
+        which is very useful when you're not exactly sure of what you're looking for.
 
-  I have left several `:help X` comments throughout the init.lua
-    These are hints about where to find more information about the relevant settings,
-    plugins or Neovim features used in Kickstart.
+    I have left several `:help X` comments throughout the init.lua
+        These are hints about where to find more information about the relevant settings,
+        plugins or Neovim features used in Kickstart.
 
-   NOTE: Look for lines like this
+      NOTE: Look for lines like this
 
-    Throughout the file. These are for you, the reader, to help you understand what is happening.
-    Feel free to delete them once you know what you're doing, but they should serve as a guide
-    for when you are first encountering a few different constructs in your Neovim config.
+        Throughout the file. These are for you, the reader, to help you understand what is happening.
+        Feel free to delete them once you know what you're doing, but they should serve as a guide
+        for when you are first encountering a few different constructs in your Neovim config.
 
 If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
 
 I hope you enjoy your Neovim journey,
 - TJ
 
-P.S. You can delete this when you're done too. It's your config now! :)
+:.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
 -- NOTE: settings for neovide
@@ -93,6 +93,10 @@ end
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -246,6 +250,62 @@ require('lazy').setup({
     end,
   },
 
+  --NOTE: barbar.nvimの設定
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
+    opts = {},
+    config = function()
+      local map = vim.api.nvim_set_keymap
+      local opts = { noremap = true, silent = true }
+      map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
+      map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+      map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
+      map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+
+      map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
+      map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+      map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
+      map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
+      map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
+      map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
+      map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
+      map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
+      map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
+      map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+
+      map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+
+      map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+
+      map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+      map('n', '<C-s-p>', '<Cmd>BufferPickDelete<CR>', opts)
+
+      map('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+      map('n', '<leader>bn', '<Cmd>BufferOrderByName<CR>', opts)
+      map('n', '<leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+      map('n', '<leader>bl', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+      map('n', '<leader>bw', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+    end,
+  },
+
+  {
+    'kazhala/close-buffers.nvim',
+    config = function()
+      local map = vim.api.nvim_set_keymap
+      local opts = { noremap = true, silent = true }
+      map('n', '<leader>th', [[<Cmd>lua require('close_buffers').delete({type = 'hidden'})<CR>]], opts)
+      map('n', '<leader>tu', [[<Cmd>lua require('close_buffers').delete({type = 'nameless'})<CR>]], opts)
+      map('n', '<leader>tc', [[<Cmd>lua require('close_buffers').delete({type = 'this'})<CR>]], opts)
+    end,
+  },
+
   {
     'shellRaining/hlchunk.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -254,7 +314,7 @@ require('lazy').setup({
         chunk = {
           enable = true,
           style = {
-            { fg = '#00FFDD' },
+            { fg = '#FF00DD' },
             { fg = '#f35336' },
           },
         },
@@ -1183,6 +1243,3 @@ require('lazy').setup({
     },
   },
 })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
