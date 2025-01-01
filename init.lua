@@ -1,5 +1,5 @@
+--
 --[[
---test
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -24,7 +24,7 @@ What is Kickstart?
 
     Kickstart.nvim is *not* a distribution.
 
-    Kickstart.nvim is a starting point for your own configuration.
+Kickstart.nvim is a starting point for your own configuration.
         The goal is that you can read every line of code, top-to-bottom, understand
         what your configuration is doing, and modify it to suit your needs.
 
@@ -200,6 +200,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<leader>tq', ':tabc<CR>', { desc = 'tab close' })
 vim.keymap.set('i', 'jj', '<ESC>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>xw', '<cmd>w<CR>', { desc = 'write' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -269,32 +270,32 @@ require('lazy').setup({
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
       -- Move to previous/next
-      map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
-      map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+      map('n', '≤', '<Cmd>BufferPrevious<CR>', opts)
+      map('n', '≥', '<Cmd>BufferNext<CR>', opts)
       -- Re-order to previous/next
-      map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
-      map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+      map('n', '¯', '<Cmd>BufferMovePrevious<CR>', opts)
+      map('n', '˘', '<Cmd>BufferMoveNext<CR>', opts)
 
       -- Goto buffer in position
-      map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
-      map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
-      map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
-      map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
-      map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
-      map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
-      map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
-      map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
-      map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
-      map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+      map('n', '⁄', '<Cmd>BufferGoto 1<CR>', opts)
+      map('n', '€', '<Cmd>BufferGoto 2<CR>', opts)
+      map('n', '‹', '<Cmd>BufferGoto 3<CR>', opts)
+      map('n', '›', '<Cmd>BufferGoto 4<CR>', opts)
+      map('n', 'ﬁ', '<Cmd>BufferGoto 5<CR>', opts)
+      map('n', 'ﬂ', '<Cmd>BufferGoto 6<CR>', opts)
+      map('n', '‡', '<Cmd>BufferGoto 7<CR>', opts)
+      map('n', '°', '<Cmd>BufferGoto 8<CR>', opts)
+      map('n', '·', '<Cmd>BufferGoto 9<CR>', opts)
+      map('n', '‚', '<Cmd>BufferLast<CR>', opts)
 
       -- Pin/unpin buffer
-      map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+      map('n', '<M-p>', '<Cmd>BufferPin<CR>', opts)
       -- Goto pinned/unpinned buffer
       -- :BufferGotoPinned
       -- :BufferGotoUnpinned
 
       -- Close buffer
-      map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+      map('n', '<M-c>', '<Cmd>BufferClose<CR>', opts)
 
       -- Wipeout buffer
       -- :BufferWipeout
@@ -444,6 +445,9 @@ require('lazy').setup({
 
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+
+  -- NOTE: vim surround
+  'tpope/vim-surround',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -1067,6 +1071,13 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      {
+        'tzachar/cmp-fuzzy-buffer',
+        dependencies = {
+          'hrsh7th/nvim-cmp',
+          'tzachar/fuzzy.nvim',
+        },
+      },
     },
     config = function()
       -- See `:help cmp`
@@ -1143,6 +1154,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'fuzzy_buffer' },
         },
       }
     end,
@@ -1185,7 +1197,7 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
