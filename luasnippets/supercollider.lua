@@ -5,6 +5,7 @@ local i = ls.insert_node
 local fmt = require('luasnip.extras.fmt').fmt
 
 return {
-  -- s('pr', fmt('print({})', { i(1, 'value') })),
   s('soa', fmt('SinOsc.ar({})', { i(1, '440') })),
+  s('pbd', fmt('Pbind({})', { i(1, '') })),
+  s('psq', fmt('Pseq({})', { i(1, '') })),
 }
