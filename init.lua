@@ -469,6 +469,15 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
+      -- TODO: gdscript
+      local lspconfig = require 'lspconfig'
+      lspconfig.gdscript.setup {
+        name = 'godot',
+        cmd = vim.lsp.rpc.connect('127.0.0.1', '6005'),
+        filetypes = { 'gd', 'gdscript', 'gdscirpt3' },
+        root_dir = lspconfig.util.root_pattern('project.godot', '.git'),
+      }
+
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -891,6 +900,9 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+
+      -- TODO: install indentscope
+      require('mini.indentscope').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
