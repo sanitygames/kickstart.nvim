@@ -277,6 +277,45 @@ require('lazy').setup({
     end,
   },
 
+  -- NOTE: supercollider settings
+  {
+    'davidgranstrom/scnvim',
+    config = function()
+      local scnvim = require 'scnvim'
+      local map = scnvim.map
+      local map_expr = scnvim.map_expr
+
+      scnvim.setup {
+        keymaps = {
+          ['<M-e>'] = map('editor.send_line', { 'i', 'n' }),
+          ['<C-e>'] = {
+            map('editor.send_block', { 'i', 'n' }),
+            map('editor.send_selection', 'x'),
+          },
+          ['<CR>'] = map 'postwin.toggle',
+          ['<M-CR>'] = map('postwin.toggle', 'i'),
+          ['<M-L>'] = map('postwin.clear', { 'n', 'i' }),
+          ['<C-k>'] = map('signature.show', { 'n', 'i' }),
+          ['<F12>'] = map('sclang.hard_stop', { 'n', 'x', 'i' }),
+          ['<leader>st'] = map 'sclang.start',
+          ['<leader>sk'] = map 'sclang.recompile',
+          ['<F1>'] = map_expr 's.boot',
+          ['<F2>'] = map_expr 's.meter',
+        },
+        editor = {
+          highlight = {
+            color = 'IncSearch',
+          },
+        },
+        postwin = {
+          float = {
+            enable = true,
+          },
+        },
+      }
+    end,
+  },
+
   -- TODO: カッコを色付きで表示する
 
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
@@ -851,9 +890,9 @@ require('lazy').setup({
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -963,7 +1002,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'gdscript' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'gdscript', 'supercollider' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -975,6 +1014,19 @@ require('lazy').setup({
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
+
+    -- NOTE: supercollider settings
+    config = function()
+      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+      parser_config.supercollider = {
+        install_info = {
+          url = 'https://github.com/madskjeldgaard/tree-sitter-supercollider',
+          files = { 'src/parser.c', 'src/scanner.c' },
+          maintainer = '@madskjeldgaard',
+        },
+        filetype = 'supercollider',
+      }
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
