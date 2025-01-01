@@ -246,36 +246,109 @@ require('lazy').setup({
     end,
   },
 
-  -- NOTE: インデントを色つきで表示する。
   {
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    opts = {},
+    'shellRaining/hlchunk.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-      local highlight = {
-        'RainbowRed',
-        'RainbowYellow',
-        'RainbowBlue',
-        'RainbowOrange',
-        'RainbowGreen',
-        'RainbowViolet',
-        'RainbowCyan',
+      require('hlchunk').setup {
+        chunk = {
+          enable = true,
+          style = {
+            { fg = '#00FFDD' },
+            { fg = '#f35336' },
+          },
+        },
+        indent = {
+          enable = false,
+          chars = {
+            '│',
+          },
+          style = {
+            '#990000',
+            '#990900',
+            '#999900',
+            '#009900',
+            '#009999',
+            '#000099',
+            '#090099',
+          },
+        },
+        blank = {
+          enable = true,
+          chars = {
+            ' ',
+            '․',
+            '⁚',
+            '⁖',
+            '⁘',
+            '⁙',
+          },
+        },
       }
-
-      local hooks = require 'ibl.hooks'
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
-        vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
-        vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
-        vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
-        vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
-        vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
-        vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
-      end)
-      require('ibl').setup { indent = { highlight = highlight } }
     end,
   },
 
+  -- TODO: カッコを色付きで表示する
+  {
+    'HiPhish/rainbow-delimiters.nvim',
+    config = function()
+      local rainbow_delimiters = require 'rainbow-delimiters'
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [''] = rainbow_delimiters.strategy['global'],
+          vim = rainbow_delimiters.strategy['local'],
+        },
+        query = {
+          [''] = 'rainbow-delimiters',
+          lua = 'rainbow-blocks',
+        },
+        priority = {
+          [''] = 110,
+          lua = 210,
+        },
+        highlight = {
+          'RainbowDelimiterRed',
+          'RainbowDelimiterYellow',
+          'RainbowDelimiterBlue',
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterGreen',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterCyan',
+        },
+      }
+    end,
+  },
+
+  -- -- NOTE: インデントを色つきで表示する。
+  -- {
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   main = 'ibl',
+  --   opts = {},
+  --   config = function()
+  --     local highlight = {
+  --       'RainbowRed',
+  --       'RainbowYellow',
+  --       'RainbowBlue',
+  --       'RainbowOrange',
+  --       'RainbowGreen',
+  --       'RainbowViolet',
+  --       'RainbowCyan',
+  --     }
+  --
+  --     local hooks = require 'ibl.hooks'
+  --     hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+  --       vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
+  --       vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
+  --       vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
+  --       vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
+  --       vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
+  --       vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
+  --       vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
+  --     end)
+  --     require('ibl').setup { indent = { highlight = highlight } }
+  --   end,
+  -- },
+  --
   -- NOTE: supercollider settings
   {
     'davidgranstrom/scnvim',
@@ -314,8 +387,6 @@ require('lazy').setup({
       }
     end,
   },
-
-  -- TODO: カッコを色付きで表示する
 
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -1052,7 +1123,7 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
 
       -- NOTE: install indentscope
-      require('mini.indentscope').setup()
+      -- require('mini.indentscope').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
