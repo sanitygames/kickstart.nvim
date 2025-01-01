@@ -447,6 +447,35 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
+  --NOTE: git関係
+  {
+    'kdheepak/lazygit.nvim',
+    lazy = true,
+    cmd = {
+      'LazyGit',
+      'LazyGitConfig',
+      'LazyGitCurrentFile',
+      'LazyGitFilter',
+      'LazyGitFilterCurrentFile',
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    keys = {
+      { '<leader>g', '<cmd>LazyGit<CR>', desc = 'LazyGit' },
+    },
+  },
+
+  {
+    'sindrets/diffview.nvim',
+    config = function()
+      local map = vim.api.nvim_set_keymap
+      local opts = { noremap = true, silent = true }
+      map('n', '<leader>hd', '<cmd>DiffviewOpen HEAD~1<CR>', opts)
+      map('n', '<leader>hf', '<cmd>DiffviewFileHistory %<CR>', opts)
+      require('diffview').setup()
+    end,
+  },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
