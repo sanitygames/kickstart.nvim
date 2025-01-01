@@ -86,7 +86,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 
 -- NOTE: settings for neovide
 if vim.g.neovide then
-  vim.print(vim.g.neovide_version)
+  vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14'
 end
 
 -- Set <space> as the leader key
