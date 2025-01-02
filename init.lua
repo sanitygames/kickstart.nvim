@@ -1133,13 +1133,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      {
-        'tzachar/cmp-fuzzy-buffer',
-        dependencies = {
-          'hrsh7th/nvim-cmp',
-          'tzachar/fuzzy.nvim',
-        },
-      },
+      'hrsh7th/cmp-buffer',
     },
     config = function()
       -- See `:help cmp`
@@ -1216,7 +1210,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-          { name = 'fuzzy_buffer' },
+          { name = 'buffer' },
         },
       }
     end,
