@@ -255,6 +255,52 @@ require('lazy').setup({
     end,
   },
 
+  -- NOTE: dial.nvim
+  {
+    'monaqa/dial.nvim',
+    config = function()
+      local augend = require 'dial.augend'
+      require('dial.config').augends:register_group {
+        default = {
+          augend.integer.alias.decimal,
+          augend.integer.alias.hex,
+          augend.date.alias['%Y/%m/%d'],
+          augend.constant.alias.bool,
+          require('dial.augend').decimal_fraction.new {
+            decimal_places = 2,
+            signed = false,
+            increment = 0.01,
+          },
+        },
+      }
+      local map = vim.keymap.set
+      map('n', '<C-a>', function()
+        require('dial.map').manipulate('increment', 'normal')
+      end)
+      map('n', '<C-x>', function()
+        require('dial.map').manipulate('decrement', 'normal')
+      end)
+      map('n', 'g<C-a>', function()
+        require('dial.map').manipulate('increment', 'gnormal')
+      end)
+      map('n', 'g<C-x>', function()
+        require('dial.map').manipulate('decrement', 'gnormal')
+      end)
+      map('v', '<C-a>', function()
+        require('dial.map').manipulate('increment', 'visual')
+      end)
+      map('v', '<C-x>', function()
+        require('dial.map').manipulate('decrement', 'visual')
+      end)
+      map('v', 'g<C-a>', function()
+        require('dial.map').manipulate('increment', 'gvisual')
+      end)
+      map('v', 'g<C-x>', function()
+        require('dial.map').manipulate('decrement', 'gvisual')
+      end)
+    end,
+  },
+
   --NOTE: barbar.nvimの設定
   {
     'romgrk/barbar.nvim',
@@ -319,6 +365,7 @@ require('lazy').setup({
       map('n', '<leader>bw', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
     end,
   },
+
   {
     'phaazon/hop.nvim',
     branch = 'v2',
@@ -330,7 +377,7 @@ require('lazy').setup({
     keys = {
       { '<leader>j', '<cmd>HopChar1<CR>', { desc = 'HopChar' } },
       { '<leader>l', '<cmd>HopLine<CR>', { desc = 'HopChar' } },
-      { '<leader>k', '<cmd>Hopword<CR>', { desc = 'HopChar' } },
+      { '<leader>k', '<cmd>HopWord<CR>', { desc = 'HopChar' } },
     },
   },
 
@@ -461,7 +508,8 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: vim surround
-  'tpope/vim-surround',
+  -- 'tpope/vim-surround',
+  'machakann/vim-sandwich',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
