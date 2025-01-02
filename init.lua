@@ -319,6 +319,20 @@ require('lazy').setup({
       map('n', '<leader>bw', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
     end,
   },
+  {
+    'phaazon/hop.nvim',
+    branch = 'v2',
+    config = function()
+      require('hop').setup {
+        multi_windows = true,
+      }
+    end,
+    keys = {
+      { '<leader>j', '<cmd>HopChar1<CR>', { desc = 'HopChar' } },
+      { '<leader>l', '<cmd>HopLine<CR>', { desc = 'HopChar' } },
+      { '<leader>k', '<cmd>Hopword<CR>', { desc = 'HopChar' } },
+    },
+  },
 
   {
     'kazhala/close-buffers.nvim',
@@ -721,7 +735,7 @@ require('lazy').setup({
       local lspconfig = require 'lspconfig'
       lspconfig.gdscript.setup {
         name = 'godot',
-        cmd = vim.lsp.rpc.connect('127.0.0.1', '6005'),
+        cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
         filetypes = { 'gd', 'gdscript', 'gdscirpt3' },
         root_dir = lspconfig.util.root_pattern('project.godot', '.git'),
       }
@@ -1006,25 +1020,25 @@ require('lazy').setup({
             end
           end),
 
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.locally_jumpable(1) then
-              luasnip.jump(1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
+          -- ['<Tab>'] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.locally_jumpable(1) then
+          --     luasnip.jump(1)
+          --   else
+          --     fallback()
+          --   end
+          -- end, { 'i', 's' }),
+          --
+          -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_prev_item()
+          --   elseif luasnip.locally_jumpable(-1) then
+          --     luasnip.jump(-1)
+          --   else
+          --     fallback()
+          --   end
+          -- end, { 'i', 's' }),
 
           -- ... Your other mappings ...
         },
@@ -1115,8 +1129,8 @@ require('lazy').setup({
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
           ['<CR>'] = cmp.mapping.confirm { select = true },
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          -- ['<Tab>'] = cmp.mapping.select_next_item(),
+          -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
