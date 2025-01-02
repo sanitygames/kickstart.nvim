@@ -301,6 +301,18 @@ require('lazy').setup({
       end)
     end,
   },
+  {
+    'nvim-zh/colorful-winsep.nvim',
+    event = { 'WinLeave' },
+    config = function()
+      require('colorful-winsep').setup {
+        hi = {
+          bg = '',
+          fg = '#39FFE3',
+        },
+      }
+    end,
+  },
   -- NOTE: treesj
   {
     'wansmer/treesj',
