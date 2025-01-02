@@ -85,10 +85,8 @@ I hope you enjoy your Neovim journey,
 --]]
 
 -- NOTE: settings for neovide
-if vim.g.neovide then
-  vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14'
-  vim.o.laststatus = 3
-end
+vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14'
+vim.o.laststatus = 3
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -359,6 +357,10 @@ require('lazy').setup({
     config = function()
       require('wildfire').setup()
     end,
+  },
+  -- NOTE: vim-findroot
+  {
+    'mattn/vim-findroot',
   },
 
   --NOTE: barbar.nvimの設定
@@ -1332,9 +1334,7 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
-
-      -- NOTE: install indentscope
-      -- require('mini.indentscope').setup()
+      require('mini.jump').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
