@@ -87,6 +87,7 @@ I hope you enjoy your Neovim journey,
 -- NOTE: settings for neovide
 if vim.g.neovide then
   vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14'
+  vim.o.laststatus = 3
 end
 
 -- Set <space> as the leader key
@@ -300,6 +301,24 @@ require('lazy').setup({
       end)
     end,
   },
+  -- NOTE: treesj
+  {
+    'wansmer/treesj',
+    keys = { '<leader>mm', '<leader>mj', '<leader>ms' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('treesj').setup {}
+    end,
+  },
+  -- NOTE: wildfire.nvim
+  {
+    'sustech-data/wildfire.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      require('wildfire').setup()
+    end,
+  },
 
   --NOTE: barbar.nvimの設定
   {
@@ -480,7 +499,7 @@ require('lazy').setup({
             map('editor.send_block', { 'i', 'n' }),
             map('editor.send_selection', 'x'),
           },
-          ['<CR>'] = map 'postwin.toggle',
+          ['<C-Space>'] = map 'postwin.toggle',
           ['<M-CR>'] = map('postwin.toggle', 'i'),
           ['<M-L>'] = map('postwin.clear', { 'n', 'i' }),
           ['<C-k>'] = map('signature.show', { 'n', 'i' }),
@@ -505,11 +524,11 @@ require('lazy').setup({
   },
 
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'pope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: vim surround
-  -- 'tpope/vim-surround',
-  'machakann/vim-sandwich',
+  'tpope/vim-surround',
+  -- 'machakann/vim-sandwich',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -1068,25 +1087,25 @@ require('lazy').setup({
             end
           end),
 
-          -- ['<Tab>'] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.locally_jumpable(1) then
-          --     luasnip.jump(1)
-          --   else
-          --     fallback()
-          --   end
-          -- end, { 'i', 's' }),
-          --
-          -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_prev_item()
-          --   elseif luasnip.locally_jumpable(-1) then
-          --     luasnip.jump(-1)
-          --   else
-          --     fallback()
-          --   end
-          -- end, { 'i', 's' }),
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
 
           -- ... Your other mappings ...
         },

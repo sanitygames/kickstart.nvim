@@ -7,17 +7,13 @@
 
 - Ctrl+O , Iでカーソル位置もどる、 すすむ
 
-### nvim-surround
-"Hello world!" 
-'Hello world!' cs"'
-<q>Hello world!</q> cs'<q>
-"Hello world!" cst"
-Hello world! ds"
-[Hello] world! ysiw]
-{  Hello  } world! cs](
-{  Hello  } world! cs](
+### nvim-sandwich
+- sr"' surround re
+- sd"
+- saiw]
 
 
+Hello  world!
 
 
 
