@@ -70,7 +70,11 @@ return {
 
     -- vim-findroot の設定
     -- カレントフォルダを自動で設定する。
-    { 'mattn/vim-findroot' },
+    -- { 'mattn/vim-findroot' },
+    {
+        'ahmedkhalf/project.nvim',
+        opt = {},
+    },
 
 
     -- wildfire.nvim の設定
