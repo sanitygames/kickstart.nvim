@@ -5,7 +5,8 @@ return { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     lazy = false,
     keys = {
-      { '<leader>S', '<cmd>lua MiniSessions.select()<CR>', desc = 'MiniSessions.select' }
+      { '<leader>Ss', '<cmd>lua MiniSessions.select()<CR>', desc = 'MiniSessions.select' },
+      { '<leader>Sw', '<cmd>lua MiniSessions.write()<CR>' },
     },
     config = function()
       -- Better Around/Inside textobjects
@@ -16,10 +17,14 @@ return { -- Collection of various small independent plugins/modules
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
 
+      -- MiniSessions
+      -- TODO: バッファのゴミみたいなのが出る。
       require('mini.sessions').setup {
+        autowrite = false,
         directory = '~/.config/nvim/sessions',
         file = '',
       }
+
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
@@ -45,6 +50,7 @@ return { -- Collection of various small independent plugins/modules
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
       require('mini.jump').setup()
+
       require('mini.starter').setup {
         header = [[
   .-')       ('-.          .-') _             .-') _
@@ -66,8 +72,6 @@ return { -- Collection of various small independent plugins/modules
  |  '--'  |    |  | |  |  |  |   |  |  |  `---. \       /
   `------'     `--' `--'  `--'   `--'  `------'  `-----'
         ]],
-
-
       }
     end,
   }

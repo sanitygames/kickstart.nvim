@@ -252,34 +252,21 @@ require('lazy').setup({
   -- NOTE: (move)(disabled)wildfire.nvim
   -- NOTE: (move)vim-findroot
   -- NOTE: (move) barbar.nvim
+  -- NOTE: (move) hop.nvim
 
 
 
-  {
-    'phaazon/hop.nvim',
-    branch = 'v2',
-    config = function()
-      require('hop').setup {
-        multi_windows = true,
-      }
-    end,
-    keys = {
-      { '<leader>j', '<cmd>HopChar1<CR>', { desc = 'HopChar' } },
-      { '<leader>l', '<cmd>HopLine<CR>',  { desc = 'HopChar' } },
-      { '<leader>k', '<cmd>HopWord<CR>',  { desc = 'HopChar' } },
-    },
-  },
-
-  {
-    'kazhala/close-buffers.nvim',
-    config = function()
-      local map = vim.api.nvim_set_keymap
-      local opts = { noremap = true, silent = true }
-      map('n', '<leader>td', [[<Cmd>lua require('close_buffers').delete({type = 'hidden'})<CR>]], opts)
-      map('n', '<leader>tu', [[<Cmd>lua require('close_buffers').delete({type = 'nameless'})<CR>]], opts)
-      map('n', '<leader>tc', [[<Cmd>lua require('close_buffers').delete({type = 'this'})<CR>]], opts)
-    end,
-  },
+  -- NOTE: 一旦使わない。
+  -- {
+  --   'kazhala/close-buffers.nvim',
+  --   config = function()
+  --     local map = vim.api.nvim_set_keymap
+  --     local opts = { noremap = true, silent = true }
+  --     map('n', '<leader>td', [[<Cmd>lua require('close_buffers').delete({type = 'hidden'})<CR>]], opts)
+  --     map('n', '<leader>tu', [[<Cmd>lua require('close_buffers').delete({type = 'nameless'})<CR>]], opts)
+  --     map('n', '<leader>tc', [[<Cmd>lua require('close_buffers').delete({type = 'this'})<CR>]], opts)
+  --   end,
+  -- },
 
   {
     'shellRaining/hlchunk.nvim',
@@ -397,7 +384,12 @@ require('lazy').setup({
   'pope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: vim surround
-  'tpope/vim-surround',
+  {
+    'kylechui/nvim-surround',
+    event = 'VeryLazy',
+    config = true,
+  },
+  -- 'tpope/vim-surround',
   -- 'machakann/vim-sandwich',
 
   -- NOTE: Plugins can also be added by using a table,
@@ -514,13 +506,14 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
-        { '<leader>c', group = '[C]ode',     mode = { 'n', 'x' } },
+        { '<leader>c', group = '[C]ode',       mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>h', group = 'Git [H]unk',   mode = { 'n', 'v' } },
+        { '<leader>S', group = 'MiniSessions', mode = { 'n' } },
       },
     },
   },

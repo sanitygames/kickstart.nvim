@@ -187,4 +187,19 @@ return {
       map('n', '<leader>bw', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
     end,
   },
+
+  -- hop.nvim の設定
+  -- jumpmotionみたいなの
+  {
+    'phaazon/hop.nvim',
+    branch = 'v2',
+    opts = {
+      multi_windows = false,
+    },
+    keys = {
+      { '<leader>j', '<cmd>HopChar1<CR>',     desc = 'HopChar' },
+      { '<leader>l', '<cmd>HopLineStart<CR>', desc = 'HopLine' },
+      { '<leader>k', '<cmd>HopWord<CR>',      desc = 'HopWord' },
+    },
+  },
 }
