@@ -5,8 +5,6 @@ return { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     lazy = false,
     keys = {
-      { '<leader>Ss', '<cmd>lua MiniSessions.select()<CR>', desc = 'MiniSessions.select' },
-      { '<leader>Sw', '<cmd>lua MiniSessions.write()<CR>' },
     },
     config = function()
       -- Better Around/Inside textobjects

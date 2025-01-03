@@ -1,6 +1,5 @@
 return {
 
-
   -- winsep.nvim の設定
   -- ウィンドウの枠色を変える。
   {
@@ -92,23 +91,18 @@ return {
       -- :BufferWipeout
 
       -- Close commands
-      -- :BufferCloseAllButCurrent
       -- :BufferCloseAllButPinned
       -- :BufferCloseAllButCurrentOrPinned
-      -- :BufferCloseBuffersLeft
-      -- :BufferCloseBuffersRight
+      map('n', '<leader>bca', '<Cmd>BufferCloseAllButCurrent<CR>', opts)
+      map('n', '<leader>bcl', '<Cmd>BufferCloseBuffersLeft<CR>', opts)
+      map('n', '<leader>bcr', '<Cmd>BufferCloseBuffersRight<CR>', opts)
 
       -- Magic buffer-picking mode
       map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
       map('n', '<C-s-p>', '<Cmd>BufferPickDelete<CR>', opts)
 
       -- Sort automatically by...
-      map(
-        'n',
-        '<leader>bb',
-        '<Cmd>BufferOrderByBufferNumber<CR>',
-        opts
-      )
+      map('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
       map('n', '<leader>bn', '<Cmd>BufferOrderByName<CR>', opts)
       map('n', '<leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
       map('n', '<leader>bl', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
@@ -200,5 +194,65 @@ return {
         },
       }
     end,
+  },
+
+  -- which-key.nvim の設定
+  {
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    opts = {
+      -- delay between pressing a key and opening which-key (milliseconds)
+      -- this setting is independent of vim.opt.timeoutlen
+      delay = 0,
+      icons = {
+        -- set icon mappings to true if you have a Nerd Font
+        mappings = vim.g.have_nerd_font,
+        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+        -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
+        keys = vim.g.have_nerd_font and {} or {
+          Up = '<Up> ',
+          Down = '<Down> ',
+          Left = '<Left> ',
+          Right = '<Right> ',
+          C = '<C-…> ',
+          M = '<M-…> ',
+          D = '<D-…> ',
+          S = '<S-…> ',
+          CR = '<CR> ',
+          Esc = '<Esc> ',
+          ScrollWheelDown = '<ScrollWheelDown> ',
+          ScrollWheelUp = '<ScrollWheelUp> ',
+          NL = '<NL> ',
+          BS = '<BS> ',
+          Space = '<Space> ',
+          Tab = '<Tab> ',
+          F1 = '<F1>',
+          F2 = '<F2>',
+          F3 = '<F3>',
+          F4 = '<F4>',
+          F5 = '<F5>',
+          F6 = '<F6>',
+          F7 = '<F7>',
+          F8 = '<F8>',
+          F9 = '<F9>',
+          F10 = '<F10>',
+          F11 = '<F11>',
+          F12 = '<F12>',
+        },
+      },
+
+      -- Document existing key chains
+      spec = {
+        { '<leader>c',  group = '[C]ode',         mode = { 'n', 'x' } },
+        { '<leader>d',  group = '[D]ocument' },
+        { '<leader>r',  group = '[R]ename' },
+        { '<leader>s',  group = '[S]earch' },
+        { '<leader>w',  group = '[W]orkspace' },
+        { '<leader>t',  group = '[T]oggle' },
+        { '<leader>g',  group = '[G]it',          mode = { 'n' } },
+        { '<leader>b',  group = '[B]uffer',       mode = { 'n' } },
+        { '<leader>bc', group = 'Buffer [C]lose', mode = { 'n' } },
+      },
+    },
   },
 }
