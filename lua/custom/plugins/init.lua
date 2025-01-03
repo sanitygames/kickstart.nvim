@@ -3,6 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+
   -- skkeletonの設定
   {
     'vim-skk/skkeleton',
@@ -17,19 +18,19 @@ return {
       }
     end,
   },
-
   -- dial.nvimの設定
+  -- TODO: g<C-a>, g<C-x> visualモード時の挙動がちょっとおかしい
   {
     'monaqa/dial.nvim',
     keys = {
-      { '<C-a>',  function() require('dial.map').manipulate('increment', 'normal') end },
-      { '<C-x>',  function() require('dial.map').manipulate('decrement', 'normal') end },
-      { 'g<C-a>', function() require('dial.map').manipulate('increment', 'gnormal') end },
-      { 'g<C-x>', function() require('dial.map').manipulate('decrement', 'gnormal') end },
-      { '<C-a>',  function() require('dial.map').manipulate('increment', 'normal') end,  'v' },
-      { '<C-x>',  function() require('dial.map').manipulate('decrement', 'normal') end,  'v' },
-      { 'g<C-a>', function() require('dial.map').manipulate('increment', 'gnormal') end, 'v' },
-      { 'g<C-x>', function() require('dial.map').manipulate('decrement', 'gnormal') end, 'v' },
+      { '<C-a>',  function() require('dial.map').manipulate('increment', 'normal') end,  mode = 'n' },
+      { '<C-x>',  function() require('dial.map').manipulate('decrement', 'normal') end,  mode = 'n' },
+      { 'g<C-a>', function() require('dial.map').manipulate('increment', 'gnormal') end, mode = 'n' },
+      { 'g<C-x>', function() require('dial.map').manipulate('decrement', 'gnormal') end, mode = 'n' },
+      { '<C-a>',  function() require('dial.map').manipulate('increment', 'visual') end,  mode = 'v' },
+      { '<C-x>',  function() require('dial.map').manipulate('decrement', 'visual') end,  mode = 'v' },
+      { 'g<C-a>', function() require('dial.map').manipulate('increment', 'gvisual') end, mode = 'v' },
+      { 'g<C-x>', function() require('dial.map').manipulate('decrement', 'gvisual') end, mode = 'v' },
     },
 
     config = function()
