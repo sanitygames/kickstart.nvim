@@ -381,21 +381,10 @@ require('lazy').setup({
   },
 
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'pope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
-  -- NOTE: vim surround
-  {
-    'kylechui/nvim-surround',
-    event = 'VeryLazy',
-    config = true,
-  },
-  -- 'tpope/vim-surround',
-  -- 'machakann/vim-sandwich',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
-  --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
   --NOTE: git関係
@@ -413,7 +402,7 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
     },
     keys = {
-      { '<leader>g', '<cmd>LazyGit<CR>', desc = 'LazyGit' },
+      { '<leader>gg', '<cmd>LazyGit<CR>', desc = 'LazyGit' },
     },
   },
 
@@ -422,8 +411,8 @@ require('lazy').setup({
     config = function()
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
-      map('n', '<leader>hd', '<cmd>DiffviewOpen HEAD~1<CR>', opts)
-      map('n', '<leader>hf', '<cmd>DiffviewFileHistory %<CR>', opts)
+      map('n', '<leader>gd', '<cmd>DiffviewOpen HEAD~1<CR>', opts)
+      map('n', '<leader>gh', '<cmd>DiffviewFileHistory %<CR>', opts)
       require('diffview').setup()
     end,
   },
