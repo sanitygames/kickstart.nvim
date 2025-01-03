@@ -103,7 +103,12 @@ return {
       map('n', '<C-s-p>', '<Cmd>BufferPickDelete<CR>', opts)
 
       -- Sort automatically by...
-      map('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+      map(
+        'n',
+        '<leader>bb',
+        '<Cmd>BufferOrderByBufferNumber<CR>',
+        opts
+      )
       map('n', '<leader>bn', '<Cmd>BufferOrderByName<CR>', opts)
       map('n', '<leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
       map('n', '<leader>bl', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
