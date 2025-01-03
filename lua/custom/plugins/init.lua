@@ -77,17 +77,6 @@ return {
     },
 
 
-    -- wildfire.nvim の設定
-    -- NOTE: 一旦無効にします。
-    -- {
-    --   'sustech-data/wildfire.nvim',
-    --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    --   event = { 'bufreadpre', 'bufnewfile' },
-    --   config = function()
-    --     require('wildfire').setup()
-    --   end,
-    -- },
-
     -- vim-sleuth の設定
     -- 自動でtabstopとshiftwidthを設定する。
     'pope/vim-sleuth',
