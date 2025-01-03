@@ -3,6 +3,7 @@
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
+  lazy = false,
   version = '*',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -15,6 +16,9 @@ return {
   },
   opts = {
     filesystem = {
+      filtered_items = {
+        hide_dotfiles = false,
+      },
       window = {
         mappings = {
           ['\\'] = 'close_window',

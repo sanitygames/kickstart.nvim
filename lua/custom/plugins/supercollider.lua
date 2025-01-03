@@ -1,6 +1,6 @@
 return {
 
-    -- NOTE: supercollider settings
+    --  supercollider settings
     {
         'davidgranstrom/scnvim',
         config = function()

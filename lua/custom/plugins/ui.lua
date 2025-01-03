@@ -60,8 +60,9 @@ return {
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
       -- Move to previous/next
-      map('n', '≤', '<Cmd>BufferPrevious<CR>', opts)
-      map('n', '≥', '<Cmd>BufferNext<CR>', opts)
+      map('n', '<C-<>', '<Cmd>BufferPrevious<CR>', opts)
+
+      map('n', '<C->>', '<Cmd>BufferNext<CR>', opts)
       -- Re-order to previous/next
       map('n', '¯', '<Cmd>BufferMovePrevious<CR>', opts)
       map('n', '˘', '<Cmd>BufferMoveNext<CR>', opts)

@@ -21,6 +21,7 @@
 -- NOTE: settings for neovide
 vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14'
 vim.o.laststatus = 3
+vim.o.swapfile = false
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
