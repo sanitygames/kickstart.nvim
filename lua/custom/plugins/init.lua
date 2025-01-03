@@ -94,4 +94,13 @@ return {
       }
     end,
   },
+
+  -- treesj の設定
+  -- <leader>mm ,mj, msにてブロックの改行をトグルする。
+  {
+    'wansmer/treesj',
+    keys = { '<leader>mm', '<leader>mj', '<leader>ms' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = {},
+  },
 }

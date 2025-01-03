@@ -246,14 +246,6 @@ require('lazy').setup({
   -- NOTE: (move)incline.nvim
 
   -- note: treesj
-  {
-    'wansmer/treesj',
-    keys = { '<leader>mm', '<leader>mj', '<leader>ms' },
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config = function()
-      require('treesj').setup {}
-    end,
-  },
   -- note: wildfire.nvim
   {
     'sustech-data/wildfire.nvim',
