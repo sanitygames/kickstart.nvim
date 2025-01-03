@@ -86,7 +86,7 @@ return {
       -- :BufferGotoUnpinned
 
       -- Close buffer
-      map('n', 'ç', '<Cmd>BufferClose<CR>', opts)
+      map('n', '<leader>x', '<Cmd>BufferClose<CR>', opts)
 
       -- Wipeout buffer
       -- :BufferWipeout

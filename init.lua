@@ -129,10 +129,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<leader>tq', ':tabc<CR>', { desc = 'tab close' })
 vim.keymap.set('i', 'jj', '<ESC>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>xw', '<cmd>w<CR>', { desc = 'write' })
-
--- vim.keymap.set('n', '<leader>S', '<cmd>lua print("TET")<CR>', { desc = 'test' })
--- vim.keymap.set('n', '<leader>S', '<cmd>lua MiniSessions.select()<CR>', { desc = 'test' })
 
 
 -- [[ Basic Autocommands ]]
@@ -178,6 +174,32 @@ require('lazy').setup({
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
+  {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      require('hlslens').setup()
+      local kopts = { noremap = true, silent = true }
+    end,
+
+  },
+
+  {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {
+
+    },
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      -- 'rcarriga/nvim-notify',
+    }
+
+  },
+
+  {
+    'RRethy/nvim-treesitter-textsubjects'
+  },
+
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
@@ -781,6 +803,15 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
+      textsubjects = {
+        enable = true,
+        prev_selection = ',',
+        keymaps = {
+          ['.'] = 'textsubjects-smart',
+          [';'] = 'textsubjects-container-outer',
+          ['i;'] = { 'textsubjects-container-inner', desc = "Select inside containers (classed, functions, etc.)" },
+        },
+      },
       ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'gdscript', 'supercollider' },
       -- Autoinstall languages that are not installed
       auto_install = true,
