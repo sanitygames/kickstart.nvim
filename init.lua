@@ -240,64 +240,12 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
 
-  -- NOTE: skkeletonの設定
-  -- {
-  --   'vim-skk/skkeleton',
-  --   dependencies = { 'vim-denops/denops.vim' },
-  --   config = function()
-  --     vim.fn['skkeleton#config'] {
-  --       globalDictionaries = { '~/.skk/SKK-JISYO.L' },
-  --       eggLikeNewline = true,
-  --     }
-  --
-  --     vim.keymap.set('i', '<C-j>', '<Plug>(skkeleton-enable)', { noremap = true })
-  --   end,
-  -- },
+  -- NOTE: (move)skkeletonの設定
+  -- NOTE: (move)dial.nvim
+  -- NOTE: (move)winsep.nvim
+  -- NOTE: (move)incline.nvim
 
-  -- NOTE: dial.nvim
-
-  --NOTE: winsep.nvim
-  {
-    'nvim-zh/colorful-winsep.nvim',
-    event = { 'WinLeave' },
-    config = function()
-      require('colorful-winsep').setup {
-        hi = {
-          bg = '',
-          fg = '#39FFE3',
-        },
-      }
-    end,
-  },
-  {
-    'b0o/incline.nvim',
-    config = function()
-      local helpers = require 'incline.helpers'
-      local devicons = require 'nvim-web-devicons'
-      require('incline').setup {
-        window = {
-          padding = 0,
-          margin = { horizontal = 0 },
-        },
-        render = function(props)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
-          if filename == '' then
-            filename = '[No Name]'
-          end
-          local ft_icon, ft_color = devicons.get_icon_color(filename)
-          local modified = vim.bo[props.buf].modified
-          return {
-            ft_icon and { ' ', ft_icon, ' ', guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or '',
-            ' ',
-            { filename, gui = modified and 'bold,italic' or 'bold' },
-            ' ',
-            guibg = '#44406E',
-          }
-        end,
-      }
-    end,
-  },
-  -- NOTE: treesj
+  -- note: treesj
   {
     'wansmer/treesj',
     keys = { '<leader>mm', '<leader>mj', '<leader>ms' },
@@ -306,21 +254,21 @@ require('lazy').setup({
       require('treesj').setup {}
     end,
   },
-  -- NOTE: wildfire.nvim
+  -- note: wildfire.nvim
   {
     'sustech-data/wildfire.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'bufreadpre', 'bufnewfile' },
     config = function()
       require('wildfire').setup()
     end,
   },
-  -- NOTE: vim-findroot
+  -- note: vim-findroot
   {
     'mattn/vim-findroot',
   },
 
-  --NOTE: barbar.nvimの設定
+  --note: barbar.nvimの設定
   {
     'romgrk/barbar.nvim',
     dependencies = {
@@ -395,8 +343,8 @@ require('lazy').setup({
     end,
     keys = {
       { '<leader>j', '<cmd>HopChar1<CR>', { desc = 'HopChar' } },
-      { '<leader>l', '<cmd>HopLine<CR>', { desc = 'HopChar' } },
-      { '<leader>k', '<cmd>HopWord<CR>', { desc = 'HopChar' } },
+      { '<leader>l', '<cmd>HopLine<CR>',  { desc = 'HopChar' } },
+      { '<leader>k', '<cmd>HopWord<CR>',  { desc = 'HopChar' } },
     },
   },
 
@@ -598,7 +546,7 @@ require('lazy').setup({
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-  { -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
@@ -644,7 +592,7 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
-        { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
+        { '<leader>c', group = '[C]ode',     mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
@@ -684,7 +632,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -780,7 +728,7 @@ require('lazy').setup({
       },
     },
   },
-  { 'Bilal2453/luvit-meta', lazy = true },
+  { 'Bilal2453/luvit-meta',     lazy = true },
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -792,7 +740,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
@@ -1295,24 +1243,24 @@ require('lazy').setup({
       require('mini.jump').setup()
       require('mini.starter').setup {
         header = [[
-  .-')       ('-.          .-') _             .-') _                 
- ( OO ).    ( OO ).-.     ( OO ) )           (  OO) )                
+  .-')       ('-.          .-') _             .-') _
+ ( OO ).    ( OO ).-.     ( OO ) )           (  OO) )
 (_)---\_)   / . --. / ,--./ ,--,'    ,-.-')  /     '._    ,--.   ,--.
-/    _ |    | \-.  \  |   \ |  |\    |  |OO) |'--...__)    \  `.'  / 
-\  :` `.  .-'-'  |  | |    \|  | )   |  |  \ '--.  .--'  .-')     /  
- '..`''.)  \| |_.'  | |  .     |/    |  |(_/    |  |    (OO  \   /   
-.-._)   \   |  .-.  | |  |\    |    ,|  |_.'    |  |     |   /  /\_  
-\       /   |  | |  | |  | \   |   (_|  |       |  |     `-./  /.__) 
- `-----'    `--' `--' `--'  `--'     `--'       `--'       `--'      
-                ('-.      _   .-')       ('-.     .-')               
-               ( OO ).-. ( '.( OO )_   _(  OO)   ( OO ).             
-  ,----.       / . --. /  ,--.   ,--.)(,------. (_)---\_)            
- '  .-./-')    | \-.  \   |   `.'   |  |  .---' /    _ |             
- |  |_( O- ) .-'-'  |  |  |         |  |  |     \  :` `.             
- |  | .--, \  \| |_.'  |  |  |'.'|  | (|  '--.   '..`''.)            
-(|  | '. (_/   |  .-.  |  |  |   |  |  |  .--'  .-._)   \            
- |  '--'  |    |  | |  |  |  |   |  |  |  `---. \       /            
-  `------'     `--' `--'  `--'   `--'  `------'  `-----'             
+/    _ |    | \-.  \  |   \ |  |\    |  |OO) |'--...__)    \  `.'  /
+\  :` `.  .-'-'  |  | |    \|  | )   |  |  \ '--.  .--'  .-')     /
+ '..`''.)  \| |_.'  | |  .     |/    |  |(_/    |  |    (OO  \   /
+.-._)   \   |  .-.  | |  |\    |    ,|  |_.'    |  |     |   /  /\_
+\       /   |  | |  | |  | \   |   (_|  |       |  |     `-./  /.__)
+ `-----'    `--' `--' `--'  `--'     `--'       `--'       `--'
+                ('-.      _   .-')       ('-.     .-')
+               ( OO ).-. ( '.( OO )_   _(  OO)   ( OO ).
+  ,----.       / . --. /  ,--.   ,--.)(,------. (_)---\_)
+ '  .-./-')    | \-.  \   |   `.'   |  |  .---' /    _ |
+ |  |_( O- ) .-'-'  |  |  |         |  |  |     \  :` `.
+ |  | .--, \  \| |_.'  |  |  |'.'|  | (|  '--.   '..`''.)
+(|  | '. (_/   |  .-.  |  |  |   |  |  |  .--'  .-._)   \
+ |  '--'  |    |  | |  |  |  |   |  |  |  `---. \       /
+  `------'     `--' `--'  `--'   `--'  `------'  `-----'
         ]],
       }
 

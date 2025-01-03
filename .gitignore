@@ -8,3 +8,5 @@ lazy-lock.json
 
 .DS_Store
 neovide_godot_bridge.app/
+Session.vim
+sessions/function_sue.vim
