@@ -126,5 +126,74 @@ return {
     },
   },
 
+  {
+    'shellRaining/hlchunk.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    opts = {
+      chunk = {
+        enable = true,
+        style = {
+          { fg = '#FF00DD' },
+          { fg = '#f35336' },
+        },
+      },
+      indent = {
+        enable = false,
+        chars = {
+          '│',
+        },
+        style = {
+          '#990000',
+          '#990900',
+          '#999900',
+          '#009900',
+          '#009999',
+          '#000099',
+          '#090099',
+        },
+      },
+      blank = {
+        enable = true,
+        chars = {
+          ' ',
+          '․',
+          '⁚',
+          '⁖',
+          '⁘',
+          '⁙',
+        },
+      },
+    },
+  },
 
+  -- TODO: カッコを色付きで表示する
+  {
+    'HiPhish/rainbow-delimiters.nvim',
+    config = function()
+      local rainbow_delimiters = require 'rainbow-delimiters'
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [''] = rainbow_delimiters.strategy['global'],
+          vim = rainbow_delimiters.strategy['local'],
+        },
+        query = {
+          [''] = 'rainbow-delimiters',
+          lua = 'rainbow-blocks',
+        },
+        priority = {
+          [''] = 110,
+          lua = 210,
+        },
+        highlight = {
+          'RainbowDelimiterRed',
+          'RainbowDelimiterYellow',
+          'RainbowDelimiterBlue',
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterGreen',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterCyan',
+        },
+      }
+    end,
+  },
 }
