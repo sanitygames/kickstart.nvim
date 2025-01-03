@@ -201,6 +201,10 @@ vim.keymap.set('n', '<leader>tq', ':tabc<CR>', { desc = 'tab close' })
 vim.keymap.set('i', 'jj', '<ESC>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>xw', '<cmd>w<CR>', { desc = 'write' })
 
+-- vim.keymap.set('n', '<leader>S', '<cmd>lua print("TET")<CR>', { desc = 'test' })
+-- vim.keymap.set('n', '<leader>S', '<cmd>lua MiniSessions.select()<CR>', { desc = 'test' })
+
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -240,90 +244,16 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
 
-  -- NOTE: (move)skkeletonの設定
+  -- NOTE: (move)skkeleton
   -- NOTE: (move)dial.nvim
   -- NOTE: (move)winsep.nvim
   -- NOTE: (move)incline.nvim
+  -- NOTE: (move)treesj
+  -- NOTE: (move)(disabled)wildfire.nvim
+  -- NOTE: (move)vim-findroot
+  -- NOTE: (move) barbar.nvim
 
-  -- note: treesj
-  -- note: wildfire.nvim
-  {
-    'sustech-data/wildfire.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    event = { 'bufreadpre', 'bufnewfile' },
-    config = function()
-      require('wildfire').setup()
-    end,
-  },
-  -- note: vim-findroot
-  {
-    'mattn/vim-findroot',
-  },
 
-  --note: barbar.nvimの設定
-  {
-    'romgrk/barbar.nvim',
-    dependencies = {
-      'lewis6991/gitsigns.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    init = function()
-      vim.g.barbar_auto_setup = true
-    end,
-    opts = {},
-    config = function()
-      local map = vim.api.nvim_set_keymap
-      local opts = { noremap = true, silent = true }
-      -- Move to previous/next
-      map('n', '≤', '<Cmd>BufferPrevious<CR>', opts)
-      map('n', '≥', '<Cmd>BufferNext<CR>', opts)
-      -- Re-order to previous/next
-      map('n', '¯', '<Cmd>BufferMovePrevious<CR>', opts)
-      map('n', '˘', '<Cmd>BufferMoveNext<CR>', opts)
-
-      -- Goto buffer in position
-      map('n', '⁄', '<Cmd>BufferGoto 1<CR>', opts)
-      map('n', '€', '<Cmd>BufferGoto 2<CR>', opts)
-      map('n', '‹', '<Cmd>BufferGoto 3<CR>', opts)
-      map('n', '›', '<Cmd>BufferGoto 4<CR>', opts)
-      map('n', 'ﬁ', '<Cmd>BufferGoto 5<CR>', opts)
-      map('n', 'ﬂ', '<Cmd>BufferGoto 6<CR>', opts)
-      map('n', '‡', '<Cmd>BufferGoto 7<CR>', opts)
-      map('n', '°', '<Cmd>BufferGoto 8<CR>', opts)
-      map('n', '·', '<Cmd>BufferGoto 9<CR>', opts)
-      map('n', '‚', '<Cmd>BufferLast<CR>', opts)
-
-      -- Pin/unpin buffer
-      map('n', '<M-p>', '<Cmd>BufferPin<CR>', opts)
-      -- Goto pinned/unpinned buffer
-      -- :BufferGotoPinned
-      -- :BufferGotoUnpinned
-
-      -- Close buffer
-      map('n', '<M-c>', '<Cmd>BufferClose<CR>', opts)
-
-      -- Wipeout buffer
-      -- :BufferWipeout
-
-      -- Close commands
-      -- :BufferCloseAllButCurrent
-      -- :BufferCloseAllButPinned
-      -- :BufferCloseAllButCurrentOrPinned
-      -- :BufferCloseBuffersLeft
-      -- :BufferCloseBuffersRight
-
-      -- Magic buffer-picking mode
-      map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
-      map('n', '<C-s-p>', '<Cmd>BufferPickDelete<CR>', opts)
-
-      -- Sort automatically by...
-      map('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
-      map('n', '<leader>bn', '<Cmd>BufferOrderByName<CR>', opts)
-      map('n', '<leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
-      map('n', '<leader>bl', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
-      map('n', '<leader>bw', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
-    end,
-  },
 
   {
     'phaazon/hop.nvim',
@@ -1197,71 +1127,7 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
-  { -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
-    config = function()
-      -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
 
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
-      -- require('mini.surround').setup()
-
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
-      require('mini.jump').setup()
-      require('mini.starter').setup {
-        header = [[
-  .-')       ('-.          .-') _             .-') _
- ( OO ).    ( OO ).-.     ( OO ) )           (  OO) )
-(_)---\_)   / . --. / ,--./ ,--,'    ,-.-')  /     '._    ,--.   ,--.
-/    _ |    | \-.  \  |   \ |  |\    |  |OO) |'--...__)    \  `.'  /
-\  :` `.  .-'-'  |  | |    \|  | )   |  |  \ '--.  .--'  .-')     /
- '..`''.)  \| |_.'  | |  .     |/    |  |(_/    |  |    (OO  \   /
-.-._)   \   |  .-.  | |  |\    |    ,|  |_.'    |  |     |   /  /\_
-\       /   |  | |  | |  | \   |   (_|  |       |  |     `-./  /.__)
- `-----'    `--' `--' `--'  `--'     `--'       `--'       `--'
-                ('-.      _   .-')       ('-.     .-')
-               ( OO ).-. ( '.( OO )_   _(  OO)   ( OO ).
-  ,----.       / . --. /  ,--.   ,--.)(,------. (_)---\_)
- '  .-./-')    | \-.  \   |   `.'   |  |  .---' /    _ |
- |  |_( O- ) .-'-'  |  |  |         |  |  |     \  :` `.
- |  | .--, \  \| |_.'  |  |  |'.'|  | (|  '--.   '..`''.)
-(|  | '. (_/   |  .-.  |  |  |   |  |  |  .--'  .-._)   \
- |  '--'  |    |  | |  |  |  |   |  |  |  `---. \       /
-  `------'     `--' `--'  `--'   `--'  `------'  `-----'
-        ]],
-      }
-
-      require('mini.sessions').setup {
-        directory = '~/.config/nvim/sessions',
-        file = '',
-      }
-    end,
-  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',

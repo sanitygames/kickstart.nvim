@@ -10,3 +10,4 @@ lazy-lock.json
 neovide_godot_bridge.app/
 Session.vim
 sessions/function_sue.vim
+sessions/init.vim

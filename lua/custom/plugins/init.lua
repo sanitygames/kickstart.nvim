@@ -97,10 +97,94 @@ return {
 
   -- treesj の設定
   -- <leader>mm ,mj, msにてブロックの改行をトグルする。
+  -- TODO: 一度起動すると、mのみでtoggleするのが正常なのかわからない。
   {
     'wansmer/treesj',
     keys = { '<leader>mm', '<leader>mj', '<leader>ms' },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = {},
+  },
+
+  -- vim-findroot の設定
+  -- カレントフォルダを自動で設定する。
+  { 'mattn/vim-findroot' },
+
+
+  -- wildfire.nvim の設定
+  -- NOTE: 一旦無効にします。
+  -- {
+  --   'sustech-data/wildfire.nvim',
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  --   event = { 'bufreadpre', 'bufnewfile' },
+  --   config = function()
+  --     require('wildfire').setup()
+  --   end,
+  -- },
+
+  -- barbar.nvim の設定
+  -- タブ移動を便利にする。
+  -- TODO: 設定途中
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    -- init = function()
+    --   vim.g.barbar_auto_setup = true
+    -- end,
+    opts = {},
+    config = function()
+      local map = vim.api.nvim_set_keymap
+      local opts = { noremap = true, silent = true }
+      -- Move to previous/next
+      map('n', '≤', '<Cmd>BufferPrevious<CR>', opts)
+      map('n', '≥', '<Cmd>BufferNext<CR>', opts)
+      -- Re-order to previous/next
+      map('n', '¯', '<Cmd>BufferMovePrevious<CR>', opts)
+      map('n', '˘', '<Cmd>BufferMoveNext<CR>', opts)
+
+      -- Goto buffer in position
+      map('n', '<C-!>', '<Cmd>BufferGoto 1<CR>', opts)
+      map('n', '<C-@>', '<Cmd>BufferGoto 2<CR>', opts)
+      map('n', '<C-#>', '<Cmd>BufferGoto 3<CR>', opts)
+      map('n', '<C-$>', '<Cmd>BufferGoto 4<CR>', opts)
+      map('n', '<C-%>', '<Cmd>BufferGoto 5<CR>', opts)
+      map('n', '<C-^>', '<Cmd>BufferGoto 6<CR>', opts)
+      map('n', '<C-&>', '<Cmd>BufferGoto 7<CR>', opts)
+      map('n', '<C-*>', '<Cmd>BufferGoto 8<CR>', opts)
+      map('n', '<C-(>', '<Cmd>BufferGoto 9<CR>', opts)
+      map('n', '<C-,>', '<Cmd>BufferLast<CR>', opts)
+
+      -- Pin/unpin buffer
+      -- map('n', '<M-p>', '<Cmd>BufferPin<CR>', opts)
+      -- Goto pinned/unpinned buffer
+      -- :BufferGotoPinned
+      -- :BufferGotoUnpinned
+
+      -- Close buffer
+      map('n', 'ç', '<Cmd>BufferClose<CR>', opts)
+
+      -- Wipeout buffer
+      -- :BufferWipeout
+
+      -- Close commands
+      -- :BufferCloseAllButCurrent
+      -- :BufferCloseAllButPinned
+      -- :BufferCloseAllButCurrentOrPinned
+      -- :BufferCloseBuffersLeft
+      -- :BufferCloseBuffersRight
+
+      -- Magic buffer-picking mode
+      map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+      map('n', '<C-s-p>', '<Cmd>BufferPickDelete<CR>', opts)
+
+      -- Sort automatically by...
+      map('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+      map('n', '<leader>bn', '<Cmd>BufferOrderByName<CR>', opts)
+      map('n', '<leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+      map('n', '<leader>bl', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+      map('n', '<leader>bw', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+    end,
   },
 }
