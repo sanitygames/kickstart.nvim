@@ -117,15 +117,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
---
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -167,30 +161,6 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-
-  -- NOTE: (move)skkeleton
-  -- NOTE: (move)dial.nvim
-  -- NOTE: (move)winsep.nvim
-  -- NOTE: (move)incline.nvim
-  -- NOTE: (move)treesj
-  -- NOTE: (move)(disabled)wildfire.nvim
-  -- NOTE: (move)vim-findroot
-  -- NOTE: (move) barbar.nvim
-  -- NOTE: (move) hop.nvim
-
-
-
-  -- NOTE: 一旦使わない。
-  -- {
-  --   'kazhala/close-buffers.nvim',
-  --   config = function()
-  --     local map = vim.api.nvim_set_keymap
-  --     local opts = { noremap = true, silent = true }
-  --     map('n', '<leader>td', [[<Cmd>lua require('close_buffers').delete({type = 'hidden'})<CR>]], opts)
-  --     map('n', '<leader>tu', [[<Cmd>lua require('close_buffers').delete({type = 'nameless'})<CR>]], opts)
-  --     map('n', '<leader>tc', [[<Cmd>lua require('close_buffers').delete({type = 'this'})<CR>]], opts)
-  --   end,
-  -- },
 
   -- NOTE: supercollider settings
   {
@@ -238,53 +208,6 @@ require('lazy').setup({
   -- keys can be used to configure plugin behavior/loading/etc.
   -- Use `opts = {}` to force a plugin to be loaded.
   --
-  --NOTE: git関係
-  {
-    'kdheepak/lazygit.nvim',
-    lazy = true,
-    cmd = {
-      'LazyGit',
-      'LazyGitConfig',
-      'LazyGitCurrentFile',
-      'LazyGitFilter',
-      'LazyGitFilterCurrentFile',
-    },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    keys = {
-      { '<leader>gg', '<cmd>LazyGit<CR>', desc = 'LazyGit' },
-    },
-  },
-
-  {
-    'sindrets/diffview.nvim',
-    config = function()
-      local map = vim.api.nvim_set_keymap
-      local opts = { noremap = true, silent = true }
-      map('n', '<leader>gd', '<cmd>DiffviewOpen HEAD~1<CR>', opts)
-      map('n', '<leader>gh', '<cmd>DiffviewFileHistory %<CR>', opts)
-      require('diffview').setup()
-    end,
-  },
-
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-  --    require('gitsigns').setup({ ... })
-  --
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
 
 
   -- NOTE: Plugins can specify dependencies.
