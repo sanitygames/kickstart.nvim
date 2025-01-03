@@ -241,18 +241,18 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 
   -- NOTE: skkeletonの設定
-  {
-    'vim-skk/skkeleton',
-    dependencies = { 'vim-denops/denops.vim' },
-    config = function()
-      vim.fn['skkeleton#config'] {
-        globalDictionaries = { '~/.skk/SKK-JISYO.L' },
-        eggLikeNewline = true,
-      }
-
-      vim.keymap.set('i', '<C-j>', '<Plug>(skkeleton-enable)', { noremap = true })
-    end,
-  },
+  -- {
+  --   'vim-skk/skkeleton',
+  --   dependencies = { 'vim-denops/denops.vim' },
+  --   config = function()
+  --     vim.fn['skkeleton#config'] {
+  --       globalDictionaries = { '~/.skk/SKK-JISYO.L' },
+  --       eggLikeNewline = true,
+  --     }
+  --
+  --     vim.keymap.set('i', '<C-j>', '<Plug>(skkeleton-enable)', { noremap = true })
+  --   end,
+  -- },
 
   -- NOTE: dial.nvim
   {
@@ -1424,7 +1424,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
