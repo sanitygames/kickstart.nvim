@@ -133,6 +133,13 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<leader>tq', ':tabc<CR>', { desc = 'tab close' })
 vim.keymap.set('i', 'jj', '<ESC>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-;>', '<C-o>o', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-e>', '<C-o>$', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-h>', '<BS>', { noremap = true, silent = true })
+
+
+vim.keymap.set('n', '<leader><leader>m',
+  '<cmd>lua require("telescope.builtin").find_files({cwd = "~/.config/nvim/memo/" })<CR>', { desc = 'Show memo' })
 
 
 -- [[ Basic Autocommands ]]
@@ -194,8 +201,9 @@ require('lazy').setup({
 
     },
     dependencies = {
-      'MunifTanjim/nui.nvim',
-      'rcarriga/nvim-notify',
+      'MunifTanjim/nui.nvim', -- UI library
+      'rcarriga/nvim-notify', -- 右上のウィンドウ
+
     }
 
   },
@@ -245,6 +253,18 @@ require('lazy').setup({
         cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
         filetypes = { 'gd', 'gdscript', 'gdscirpt3' },
         root_dir = lspconfig.util.root_pattern('project.godot', '.git'),
+
+        on_attach = function(client, bufnr)
+          print("GDScript LSP attached")
+
+          client.handlers["gdscript/capabilities"] = function(_, result, ctx, config)
+            if result then
+              vim.g.godot_native_classes_data = result.native_classes
+            else
+              vim.notify("No native class found")
+            end
+          end
+        end,
       }
 
       -- Brief aside: **What is LSP?**
@@ -639,6 +659,7 @@ require('lazy').setup({
           --  completions whenever it has completion options available.
           ['<C-Space>'] = cmp.mapping.complete {},
 
+
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
           --  function $name($args)
@@ -647,16 +668,17 @@ require('lazy').setup({
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
+          --
+          -- ['<C-l>'] = cmp.mapping(function()
+          --   if luasnip.expand_or_locally_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   end
+          -- end, { 'i', 's' }),
+          -- ['<C-h>'] = cmp.mapping(function()
+          --   if luasnip.locally_jumpable(-1) then
+          --     luasnip.jump(-1)
+          --   end
+          -- end, { 'i', 's' }),
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps

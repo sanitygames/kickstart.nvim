@@ -2,6 +2,9 @@ return {
     {
         'davidgranstrom/telescope-scdoc.nvim',
     },
+    {
+        'sanitygames/telescope_godot_docs',
+    },
 
     { -- Fuzzy Finder (files, lsp, etc)
         'nvim-telescope/telescope.nvim',
@@ -58,18 +61,24 @@ return {
                 --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
                 --   },
                 -- },
+                defaults = {
+                    preview_cutoff = 120,
+                },
                 -- pickers = {}
                 extensions = {
                     ['ui-select'] = {
                         require('telescope.themes').get_dropdown(),
                     },
                 },
+
             }
 
             -- Enable Telescope extensions if they are installed
             pcall(require('telescope').load_extension, 'fzf')
             pcall(require('telescope').load_extension, 'ui-select')
             pcall(require('telescope').load_extension, 'scdoc')
+            pcall(require('telescope').load_extension, 'gddoc')
+
 
 
             -- See `:help telescope.builtin`

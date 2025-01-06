@@ -1,4 +1,3 @@
---You can add your own plugins here or in other files in this directory!
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
@@ -17,6 +16,12 @@ return {
                 eggLikeNewline = true,
             }
         end,
+    },
+    {
+        'delphinus/skkeleton_indicator.nvim',
+        opts = {
+            fadeOutMs = 500,
+        }
     },
 
     -- dial.nvimの設定
@@ -79,7 +84,7 @@ return {
 
     -- vim-sleuth の設定
     -- 自動でtabstopとshiftwidthを設定する。
-    'pope/vim-sleuth',
+    'tpope/vim-sleuth',
 
     -- nvim-surround の設定
     {
@@ -89,6 +94,40 @@ return {
     },
     -- 'tpope/vim-surround',
     -- 'machakann/vim-sandwich',
+
+    -- floatウィンドウでスクリプトを実行
+    {
+        'is0n/jaq-nvim',
+        config = function()
+            require('jaq-nvim').setup({
+                cmds = {
+                    internal = {
+                        lua = "luafile %",
+                    },
+                },
+
+                behavior = {
+                    defalut = "float",
+                    startinsert = false,
+                    wincmd = false,
+                    autosave = false,
+                },
+
+                ui = {
+                    float = {
+                        border = "none",
+                        winhl = "normal",
+                        borderhl = "FloatBorder",
+                        winblend = 0,
+                        height = 0.8,
+                        width = 0.8,
+                        x = 0.5,
+                        y = 0.5,
+                    },
+                },
+            })
+        end
+    },
 
 
 }
