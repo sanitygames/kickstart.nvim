@@ -27,6 +27,10 @@ end
 vim.o.laststatus = 3
 vim.o.swapfile = false
 
+-- NOTE: 自動コメントアウトの無効化
+vim.cmd([[autocmd BufNewFile,BufRead,BufWinEnter * set formatoptions-=r]])
+vim.cmd([[autocmd BufNewFile,BufRead,BufWinEnter * set formatoptions-=o]])
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
