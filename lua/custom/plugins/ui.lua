@@ -1,5 +1,31 @@
 return {
 
+  -- 検索時の結果を近くに表示する
+  {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      require('hlslens').setup()
+      local kopts = { noremap = true, silent = true }
+    end,
+
+  },
+
+  -- commandとかmessageをキレイに表示
+  {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {
+
+    },
+    dependencies = {
+      'MunifTanjim/nui.nvim', -- UI library
+      'rcarriga/nvim-notify', -- 右上のウィンドウ
+
+    }
+
+  },
+
+
   -- winsep.nvim の設定
   -- ウィンドウの枠色を変える。
   {
@@ -10,38 +36,6 @@ return {
     },
     config = true
   },
-
-  -- incline.nvim の設定
-  -- 右上のファイル名表示
-  -- {
-  --   'b0o/incline.nvim',
-  --   event = 'VeryLazy',
-  --   config = function()
-  --     local helpers = require 'incline.helpers'
-  --     local devicons = require 'nvim-web-devicons'
-  --     require('incline').setup {
-  --       window = {
-  --         padding = 0,
-  --         margin = { horizontal = 0 },
-  --       },
-  --       render = function(props)
-  --         local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
-  --         if filename == '' then
-  --           filename = '[no name]'
-  --         end
-  --         local ft_icon, ft_color = devicons.get_icon_color(filename)
-  --         local modified = vim.bo[props.buf].modified
-  --         return {
-  --           ft_icon and { ' ', ft_icon, ' ', guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or '',
-  --           ' ',
-  --           { filename, gui = modified and 'bold,italic' or 'bold' },
-  --           ' ',
-  --           guibg = '#44406e',
-  --         }
-  --       end,
-  --     }
-  --   end,
-  -- },
 
   -- barbar.nvim の設定
   -- タブ移動を便利にする。
