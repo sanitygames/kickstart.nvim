@@ -40,7 +40,7 @@ vim.keymap.set('n', '<leader><leader>m',
     { desc = 'Show memo' })
 
 
-vim.keymap.set('n', '<C-s>', function()
+vim.keymap.set('n', '<C-b>', function()
     local count = vim.v.count
     count = count > 0 and count or 1
     for _ = 1, count do
@@ -55,3 +55,8 @@ end)
 
 vim.keymap.set('n', '<tab>', '<cmd>BufferNext<CR>', { desc = "Move focus to the next buffer" })
 vim.keymap.set('n', '<S-tab>', '<cmd>BufferPrevious<CR>', { desc = "Move focus to the next buffer" })
+
+vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cmd>w<CR>', { desc = "Save", noremap = true })
+
+vim.keymap.set('c', '<C-p>', '<Up>', { noremap = true })
+vim.keymap.set('c', '<C-n>', '<Down>', { noremap = true })
