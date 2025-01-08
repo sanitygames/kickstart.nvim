@@ -37,6 +37,8 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-buffer',
+
+            'onsails/lspkind.nvim',
         },
         config = function()
             -- See `:help cmp`
@@ -147,5 +149,14 @@ return {
         end,
     },
 
+    -- Icons
+    {
+        'onsails/lspkind.nvim',
+        config = function()
+            require('lspkind').init({
+                mode = 'symbol_text'
+            })
+        end,
+    },
 
 }
