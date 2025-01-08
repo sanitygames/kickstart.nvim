@@ -1,5 +1,24 @@
 return {
 
+  -- terminal
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    opts = {
+      size = 100,
+      open_mapping = [[<C-t>]],
+      hide_numbers = true,
+      shade_filetypes = {},
+      shede_terminals = true,
+      shading_factor = 2,
+      start_in_insert = true,
+      insert_mappings = true,
+      presist_size = true,
+      direction = 'float',
+      close_on_exit = true,
+    },
+  },
+
   -- 検索時の結果を近くに表示する
   {
     'kevinhwang91/nvim-hlslens',
