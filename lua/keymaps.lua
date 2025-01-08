@@ -1,12 +1,20 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+local function map(mode, lhs, rhs, opts)
+    opts = opts or {}
+    local default_opts = { noremap = true, silent = true }
+    setmetatable(opts, { __index = default_opts })
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -14,33 +22,35 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<leader>tq', ':tabc<CR>', { desc = 'tab close' })
-vim.keymap.set('i', 'jj', '<ESC>', { noremap = true, silent = true })
-vim.keymap.set('i', '<C-;>', '<C-o>o', { noremap = true, silent = true })
-vim.keymap.set('i', '<C-e>', '<C-o>$', { noremap = true, silent = true })
-vim.keymap.set('i', '<C-h>', '<BS>', { noremap = true, silent = true })
+map('n', '<leader>tq', ':tabc<CR>', { desc = 'tab close' })
+map('i', 'jj', '<ESC>', { noremap = true, silent = true })
+map('i', '<C-;>', '<C-o>o', { noremap = true, silent = true })
+map('i', '<C-e>', '<C-o>$', { noremap = true, silent = true })
+map('i', '<C-h>', '<BS>', { noremap = true, silent = true })
 
--- vim.keymap.set({ 'n' }, '<C-;>', '/\\d\\+<CR>', { noremap = true, silent = true, desc = 'Find variable' })
-vim.keymap.set({ 'n' }, '<C-;>', '/\\v(^|[^A-Za-z])(-?\\d+(\\.\\d+)?([eE][-+]?\\d+)?)([^A-Za-z]|$)<CR>',
+-- <C-;>で数字を検索
+map({ 'n' }, '<C-;>', '/\\v(^|[^A-Za-z])(-?\\d+(\\.\\d+)?([eE][-+]?\\d+)?)([^A-Za-z]|$)<CR>',
     { noremap = true, silent = true, desc = 'Find variable' })
 
-vim.keymap.set('n', '<leader><leader>m',
+-- <Leader><Leader>mで、メモフォルダをTelescopeで開く
+map('n', '<leader><leader>m',
     '<cmd>lua require("telescope.builtin").find_files({cwd = "~/.config/nvim/memo/", hidden = true })<CR>',
     { desc = 'Show memo' })
 
 
-vim.keymap.set('n', '<C-b>', function()
+-- <C-b>でSuperSwap
+map('n', '<C-b>', function()
     local count = vim.v.count
     count = count > 0 and count or 1
     for _ = 1, count do
@@ -51,17 +61,22 @@ vim.keymap.set('n', '<C-b>', function()
     for _ = 1, count do
         vim.cmd('normal! l')
     end
-end)
+end, { desc = "Super Char Swap" })
 
-vim.keymap.set('n', '<tab>', '<cmd>BufferNext<CR>', { desc = "Move focus to the next buffer" })
-vim.keymap.set('n', '<S-tab>', '<cmd>BufferPrevious<CR>', { desc = "Move focus to the next buffer" })
+-- <Tab><S-Tab>でバッファ移動
+map('n', '<tab>', '<cmd>BufferNext<CR>', { desc = "Move focus to the next buffer" })
+map('n', '<S-tab>', '<cmd>BufferPrevious<CR>', { desc = "Move focus to the next buffer" })
 
-vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cmd>w<CR>', { desc = "Save", noremap = true })
+-- <C-s>でセーブ
+map({ 'n', 'i' }, '<C-s>', '<cmd>w<CR>', { desc = "Save" })
 
-vim.keymap.set('c', '<C-p>', '<Up>', { noremap = true })
-vim.keymap.set('c', '<C-n>', '<Down>', { noremap = true })
+-- コマンドウィンドウで<C-P><C-N>で上下
+map('c', '<C-p>', '<Up>')
+map('c', '<C-n>', '<Down>')
 
-vim.keymap.set('i', '<C-l>', '<C-o>A', { noremap = true, silent = true })
+-- <C-L>で、インサートモードでカーソルを行末に移動
+map('i', '<C-l>', '<C-o>A', { desc = "Move Cursor at End" })
 
-vim.keymap.set('n', '<M-o>', '<cmd>put _<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<M-i>', '<cmd>put! _<CR>', { noremap = true, silent = true })
+-- Meta+o, iで空行を追加
+map('n', '<M-o>', '<cmd>put _<CR>', { desc = "Insert Blank line" })
+map('n', '<M-i>', '<cmd>put! _<CR>', { desc = "Insert Blank line Pre" })
