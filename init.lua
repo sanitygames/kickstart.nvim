@@ -66,6 +66,24 @@ require('lazy').setup({
     --
     -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
+    -- terminal
+    {
+        'akinsho/toggleterm.nvim',
+        version = '*',
+        opts = {
+            size = 100,
+            open_mapping = [[<C-t>]],
+            hide_numbers = true,
+            shade_filetypes = {},
+            shede_terminals = true,
+            shading_factor = 2,
+            start_in_insert = true,
+            insert_mappings = true,
+            presist_size = true,
+            direction = 'float',
+            close_on_exit = true,
+        },
+    },
 
     -- dap
     {
@@ -706,17 +724,17 @@ require('lazy').setup({
         },
 
         -- NOTE: supercollider settings
-        -- config = function()
-        -- local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-        -- parser_config.supercollider = {
-        --   install_info = {
-        --     url = 'https://github.com/madskjeldgaard/tree-sitter-supercollider',
-        --     files = { 'src/parser.c', 'src/scanner.c' },
-        --     maintainer = '@madskjeldgaard',
-        --   },
-        --   filetype = 'supercollider',
-        -- }
-        -- end,
+        config = function()
+            local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+            parser_config.supercollider = {
+                install_info = {
+                    url = 'https://github.com/madskjeldgaard/tree-sitter-supercollider',
+                    files = { 'src/parser.c', 'src/scanner.c' },
+                    maintainer = '@madskjeldgaard',
+                },
+                filetype = 'supercollider',
+            }
+        end,
         --
         -- There are additional nvim-treesitter modules that you can use to interact
         -- with nvim-treesitter. You should go explore a few and see what interests you:
