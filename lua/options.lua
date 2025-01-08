@@ -10,6 +10,7 @@ if vim.g.neovide then
     vim.g.neovide_window_blurred = true
     vim.o.pumblend = 20
     vim.o.winblend = 0
+    vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
 end
 
 vim.o.laststatus = 3

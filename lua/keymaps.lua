@@ -60,3 +60,8 @@ vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cmd>w<CR>', { desc = "Save", noremap = t
 
 vim.keymap.set('c', '<C-p>', '<Up>', { noremap = true })
 vim.keymap.set('c', '<C-n>', '<Down>', { noremap = true })
+
+vim.keymap.set('i', '<C-l>', '<C-o>A', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<M-o>', '<cmd>put _<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<M-i>', '<cmd>put! _<CR>', { noremap = true, silent = true })
