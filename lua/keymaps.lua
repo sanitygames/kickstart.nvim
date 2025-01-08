@@ -31,6 +31,8 @@ vim.keymap.set('i', '<C-;>', '<C-o>o', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-e>', '<C-o>$', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-h>', '<BS>', { noremap = true, silent = true })
 
+-- vim.keymap.set({ 'n' }, '<C-;>', '/\\d\\+<CR>', { noremap = true, silent = true, desc = 'Find variable' })
+vim.keymap.set({ 'n' }, '<C-;>', '/\\v(^|[^A-Za-z])(-?\\d+(\\.\\d+)?([eE][-+]?\\d+)?)([^A-Za-z]|$)<CR>',{ noremap = true, silent = true, desc = 'Find variable' })
 
 vim.keymap.set('n', '<leader><leader>m',
     '<cmd>lua require("telescope.builtin").find_files({cwd = "~/.config/nvim/memo/" })<CR>', { desc = 'Show memo' })

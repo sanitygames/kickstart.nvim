@@ -45,7 +45,7 @@ return {
           {
             filter = {
               event = "notify",
-              warinig = true,
+              warning = true,
               find = "failed to run generator.*is not exectuable",
             },
             opts = { skip = true },
@@ -160,6 +160,7 @@ return {
       { '<leader>j', '<cmd>HopChar1<CR>',     desc = 'HopChar' },
       { '<leader>l', '<cmd>HopLineStart<CR>', desc = 'HopLine' },
       { '<leader>k', '<cmd>HopWord<CR>',      desc = 'HopWord' },
+      { '<leader>;', '<cmd>HopPattern<CR>' }
     },
   },
 

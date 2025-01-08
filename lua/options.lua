@@ -1,4 +1,3 @@
--- [[ Setting options ]]
 -- See `:help vim.opt`
 -- You can change these options as you wish!
 -- For more options, you can see `:help option-list`
@@ -7,6 +6,10 @@
 if vim.g.neovide then
     vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14'
     vim.g.neovide_remember_window_size = true
+    vim.g.neovide_transparency = 0.5
+    vim.g.neovide_window_blurred = true
+    vim.o.pumblend = 20
+    vim.o.winblend = 0
 end
 
 vim.o.laststatus = 3

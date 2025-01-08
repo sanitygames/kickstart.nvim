@@ -1,7 +1,6 @@
 --
 --[[
 =====================================================================
-========                                    .-----.          ========
 ========         .----------------------.   .-----.          ========
 ========         |.-""""""""""""""""""-.|   | ### |          ========
 ========         ||   KICKSTART.NVIM   ||   |-----|          ========
@@ -16,7 +15,6 @@
 
 require('options')
 require('keymaps')
-
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -174,6 +172,32 @@ require('lazy').setup({
                     project = "${workspaceFolder}",
                 }
             }
+
+            local map = vim.keymap.set
+            map('n', '<F5>', function() dap.continue() end, { desc = "DAP Continue" })
+            map('n', '<F10>', function() dap.step_over() end, { desc = "DAP StepOver" })
+            map('n', '<F11>', function() dap.step_into() end, { desc = "DAP Into" })
+            map('n', '<F12>', function() dap.step_out() end, { desc = "DAP StepOut" })
+            map('n', '<leader>db', function() dap.toggle_breakpoint() end, { desc = "DAP Toggle [B]reakpoint" })
+            map('n', '<leader>dB', function() dap.set_breakpoint() end, { desc = "DAP Set [B]reakpoint" })
+            map('n', '<leader>dlp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
+                { desc = "DAP Set [B]reakpoint2" })
+            map('n', '<leader>dr', function() dap.repl_open() end, { desc = "DAP [R]epl open" })
+            map('n', '<leader>dl', function() dap.run_last() end, { desc = "DAP Run [L]ast" })
+            map({ 'n', 'v' }, '<leader>dwh', function()
+                require('dap.ui.widgets').hover()
+            end)
+            map({ 'n', 'v' }, '<leader>dwp', function()
+                require('dap.ui.widgets').preview()
+            end)
+            map({ 'n', 'v' }, '<leader>dwf', function()
+                local widgets = require('dap.ui.widgets')
+                widgets.centered_float(widgets.frames)
+            end)
+            map({ 'n', 'v' }, '<leader>dws', function()
+                local widgets = require('dap.ui.widgets')
+                widgets.centered_float(widgets.scopes)
+            end)
         end,
     },
 
@@ -703,32 +727,6 @@ require('lazy').setup({
         end,
     },
 
-    -- { -- You can easily change to a different colorscheme.
-    --     -- Change the name of the colorscheme plugin below, and then
-    --     -- change the command in the config to whatever the name of that colorscheme is.
-    --     --
-    --     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    --     'folke/tokyonight.nvim',
-    --     priority = 1000, -- Make sure to load this before all the other start plugins.
-    --     init = function()
-    --         -- Load the colorscheme here.
-    --         -- Like many other themes, this one has different styles, and you could load
-    --         -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-    --         vim.cmd.colorscheme 'tokyonight-night'
-    --
-    --         -- You can configure highlights by doing something like:
-    --         vim.cmd.hi 'Comment gui=none'
-    --     end,
-    -- },
-
-    {
-        'rebelot/kanagawa.nvim',
-        init = function()
-            vim.cmd.colorscheme 'kanagawa'
-        end
-    },
-
-
     -- Highlight todo, notes, etc in comments
     { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -780,6 +778,25 @@ require('lazy').setup({
         --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
         --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
         --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    },
+
+    {
+        -- You can easily change to a different colorscheme.
+        -- Change the name of the colorscheme plugin below, and then
+        -- change the command in the config to whatever the name of that colorscheme is.
+        --
+        -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+        'folke/tokyonight.nvim',
+        priority = 1000, -- Make sure to load this before all the other start plugins.
+        init = function()
+            -- Load the colorscheme here.
+            -- Like many other themes, this one has different styles, and you could load
+            -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+            vim.cmd.colorscheme 'tokyonight-night'
+
+            -- You can configure highlights by doing something like:
+            vim.cmd.hi 'Comment gui=none'
+        end,
     },
 
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
