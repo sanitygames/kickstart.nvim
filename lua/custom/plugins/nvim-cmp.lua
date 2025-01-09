@@ -45,7 +45,6 @@ return {
             local cmp = require 'cmp'
             local luasnip = require 'luasnip'
             local lspkind = require('lspkind')
-            luasnip.config.setup {}
 
             cmp.setup {
                 snippet = {
@@ -53,7 +52,14 @@ return {
                         luasnip.lsp_expand(args.body)
                     end,
                 },
-                completion = { completeopt = 'menu,menuone,noinsert' },
+
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
+
+                -- completion = { completeopt = 'menu,menuone,noinsert' },
+                completion = { completeopt = 'menu, menuone, noinsert, noselect' },
 
                 -- For an understanding of why these mappings were
                 -- chosen, you will need to read `:help ins-completion`
@@ -137,14 +143,29 @@ return {
                     })
                 },
 
-                window = {
 
-                    -- completion = cmp.config.window.bordered({
-                    --     border = 'single'
-                    -- }),
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
+            }
+
+            cmp.setup.cmdline({ '/', '?' }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = 'buffer' }
                 }
+            })
+
+            -- cmp.setup.cmdline(':', {
+            --     mapping = cmp.mapping.preset.cmdline(),
+            --     sources = cmp.config.sources({
+            --         { name = 'path' }
+            --     }, {
+            --         { name = 'cmdline' }
+            --     }),
+            --     matching = { disallow_symbol_nonprefix_matching = false }
+            -- })
+            --
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            require('lspconfig')['gdscript'].setup {
+                capabilities = capabilities
             }
         end,
     },

@@ -18,7 +18,10 @@ return {
         config = function()
             -- NOTE: gdscript
             local lspconfig = require 'lspconfig'
+
+            local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
             lspconfig.gdscript.setup {
+                capabilities = capabilities,
                 name = 'godot',
                 cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
                 filetypes = { 'gd', 'gdscript', 'gdscirpt3' },

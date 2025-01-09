@@ -51,7 +51,7 @@ return {
                     -- additional_vim_regex_highlighting = { 'ruby' },
                     additional_vim_regex_highlighting = { 'ruby' },
                 },
-                indent = { enable = true, disable = { 'ruby' } },
+                indent = { enable = true, disable = { 'ruby', 'gdscript' } },
             }
         end,
         --
