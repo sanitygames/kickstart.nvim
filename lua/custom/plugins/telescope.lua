@@ -94,7 +94,7 @@ return {
             vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
             vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Find existing [B]uffers' })
 
-            vim.keymap.set('n', '<leader>ss', '<cmd>Telescope scdoc<CR>', { desc = '[S]earch [S]cdoc' })
+            vim.keymap.set('n', '<leader>scd', '<cmd>Telescope scdoc<CR>', { desc = '[S]earch S[cd]oc' })
 
             -- Slightly advanced example of overriding default behavior and theme
             vim.keymap.set('n', '<leader>/', function()

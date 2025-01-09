@@ -37,6 +37,7 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-cmdline',
 
             'onsails/lspkind.nvim',
         },
@@ -101,16 +102,20 @@ return {
                     -- <c-l> will move you to the right of each of the expansion locations.
                     -- <c-h> is similar, except moving you backwards.
                     --
-                    -- ['<C-l>'] = cmp.mapping(function()
-                    --   if luasnip.expand_or_locally_jumpable() then
-                    --     luasnip.expand_or_jump()
-                    --   end
-                    -- end, { 'i', 's' }),
-                    -- ['<C-h>'] = cmp.mapping(function()
-                    --   if luasnip.locally_jumpable(-1) then
-                    --     luasnip.jump(-1)
-                    --   end
-                    -- end, { 'i', 's' }),
+                    ['<C-l>'] = cmp.mapping(function(fallback)
+                        if luasnip.expand_or_locally_jumpable() then
+                            luasnip.expand_or_jump()
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                    ['<C-h>'] = cmp.mapping(function(fallback)
+                        if luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
 
                     -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
                     --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -125,6 +130,7 @@ return {
                     { name = 'luasnip' },
                     { name = 'path' },
                     { name = 'buffer' },
+                    { name = 'cmdline' },
                 },
 
                 formatting = {
@@ -153,16 +159,15 @@ return {
                 }
             })
 
-            -- cmp.setup.cmdline(':', {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = cmp.config.sources({
-            --         { name = 'path' }
-            --     }, {
-            --         { name = 'cmdline' }
-            --     }),
-            --     matching = { disallow_symbol_nonprefix_matching = false }
-            -- })
-            --
+            cmp.setup.cmdline(':', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = 'path' }
+                }, {
+                    { name = 'cmdline' }
+                })
+            })
+
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             require('lspconfig')['gdscript'].setup {
                 capabilities = capabilities

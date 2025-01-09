@@ -98,12 +98,12 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 
--- vim.api.nvim_create_autocmd("FileType", {
---     pattern = 'gdscript',
---     callback = function()
---         print("GDSCTIPT")
---         vim.opt_local.tabstop = 4
---         vim.opt_local.shiftwidth = 4
---         vim.opt_local.expandtab = true
---     end,
--- })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = 'gdscript',
+    callback = function()
+        print("GDSCTIPT")
+        vim.opt_local.tabstop = 4
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.expandtab = true
+    end,
+})
