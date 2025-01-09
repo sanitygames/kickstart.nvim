@@ -75,7 +75,7 @@ map('c', '<C-p>', '<Up>')
 map('c', '<C-n>', '<Down>')
 
 -- <C-L>で、インサートモードでカーソルを行末に移動
-map('i', '<C-l>', '<C-o>A', { desc = "Move Cursor at End" })
+map('i', '<C-CR>', '<C-o>A', { desc = "Move Cursor at End" })
 
 -- Meta+o, iで空行を追加
 map('n', '<M-o>', '<cmd>put _<CR>', { desc = "Insert Blank line" })

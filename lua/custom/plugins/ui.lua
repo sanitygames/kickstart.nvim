@@ -1,4 +1,34 @@
 return {
+  {
+    'ysmb-wtsg/in-and-out.nvim',
+    keys = {
+      { "<C-l>", function() require('in-and-out').in_and_out() end, mode = "i" }
+    },
+    opts = {},
+  },
+  {
+    'umblevable/quick-scope',
+    config = function()
+      vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+      vim.api.nvim_set_hl(0, "QuickScopePrimary",
+        { fg = '#f4b6d7', underline = true, ctermfg = 155, cterm = { underline = true } })
+      vim.api.nvim_set_hl(0, "QuickScopeSecondary",
+        { fg = '#fff800', underline = true, ctermfg = 81, cterm = { underline = true } })
+    end,
+  },
+
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'echasnovski/mini.nvim',
+    },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+
+    },
+  },
 
   -- terminal
   {
