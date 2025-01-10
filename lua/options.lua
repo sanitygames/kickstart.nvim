@@ -6,7 +6,7 @@
 if vim.g.neovide then
     vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h14'
     vim.g.neovide_remember_window_size = true
-    vim.g.neovide_transparency = 0.5
+    vim.g.neovide_transparency = 0.85
     vim.g.neovide_window_blurred = true
     vim.o.pumblend = 20
     vim.o.winblend = 0

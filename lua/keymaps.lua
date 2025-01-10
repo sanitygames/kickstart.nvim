@@ -38,6 +38,9 @@ map('i', 'jj', '<ESC>', { noremap = true, silent = true })
 map('i', '<C-;>', '<C-o>o', { noremap = true, silent = true })
 map('i', '<C-e>', '<C-o>$', { noremap = true, silent = true })
 map('i', '<C-h>', '<BS>', { noremap = true, silent = true })
+-- <C-L>で、インサートモードでカーソルを行末に移動
+map('i', '<C-l>', '<C-o>A', { desc = "Move Cursor at End" })
+
 
 -- <C-;>で数字を検索
 map({ 'n' }, '<C-;>', '/\\v(^|[^A-Za-z])(-?\\d+(\\.\\d+)?([eE][-+]?\\d+)?)([^A-Za-z]|$)<CR>',
@@ -73,9 +76,6 @@ map({ 'n', 'i' }, '<C-s>', '<cmd>w<CR>', { desc = "Save" })
 -- コマンドウィンドウで<C-P><C-N>で上下
 map('c', '<C-p>', '<Up>')
 map('c', '<C-n>', '<Down>')
-
--- <C-L>で、インサートモードでカーソルを行末に移動
-map('i', '<C-CR>', '<C-o>A', { desc = "Move Cursor at End" })
 
 -- Meta+o, iで空行を追加
 map('n', '<M-o>', '<cmd>put _<CR>', { desc = "Insert Blank line" })
