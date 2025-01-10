@@ -90,6 +90,7 @@ return {
 
       noice.setup({
         messages = {
+          -- enabled = false,
           view_search = "mini",
         },
         routes = {
