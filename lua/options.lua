@@ -14,7 +14,7 @@ if vim.g.neovide then
 end
 
 -- LSPデバッグ用
-vim.lsp.set_log_level("DEBUG")
+-- vim.lsp.set_log_level("DEBUG")
 
 vim.o.laststatus = 3
 vim.o.swapfile = false
@@ -101,7 +101,6 @@ vim.opt.scrolloff = 10
 vim.api.nvim_create_autocmd("FileType", {
     pattern = 'gdscript',
     callback = function()
-        print("GDSCTIPT")
         vim.opt_local.tabstop = 4
         vim.opt_local.shiftwidth = 4
         vim.opt_local.expandtab = true

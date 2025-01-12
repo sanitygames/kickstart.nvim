@@ -23,7 +23,7 @@ return {
             windows = {
                 position = "right", -- サイドバーの位置
                 wrap = true,        -- テキストの折り返し
-                width = 30,         -- サイドバーの幅
+                width = 60,         -- サイドバーの幅
                 -- その他の詳細設定は省略
             },
         },

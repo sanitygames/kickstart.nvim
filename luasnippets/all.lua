@@ -9,9 +9,16 @@ return {
     t 'println("Hello World!")',
   }),
 
-  s('tdo', {
+  s('tdp', {
     t "- [ ] "
   }),
 
+  s('tda', {
+    t "- [x] "
+  }),
+
+  s('kmp', {
+    t "<", i(1), t ">"
+  }),
 
 }
